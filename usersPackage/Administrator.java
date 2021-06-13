@@ -13,7 +13,9 @@ public class Administrator extends UserProfile{
 	
 	public Administrator() {
 		this.name = "admin";
+		this.mail = "admin";
 		this.password = "admin";
+		requestedPlaygrounds = new ArrayList<>();
 	}
 	
 	public Administrator(String name, String mail, String password, String phone, String city) {
@@ -22,6 +24,7 @@ public class Administrator extends UserProfile{
 		this.password = password;
 		this.phone = phone;
 		this.city = city;
+		requestedPlaygrounds = new ArrayList<>();
 	}
 	
 	
@@ -42,11 +45,18 @@ public class Administrator extends UserProfile{
 	public void showAllRequestedPlayGs()
 	{
 		int x = 0;
-		for(Playground i: requestedPlaygrounds)
+		if(!requestedPlaygrounds.isEmpty())
 		{
-			System.out.println("index: " + x);
-			System.out.println(i.toString());
-			x++;
+			for(Playground i: requestedPlaygrounds)
+			{
+				System.out.println("index: " + x);
+				System.out.println(i.toString());
+				x++;
+			}
+		}
+		else
+		{
+			System.out.println("List is empty!!");
 		}
 	}
 	

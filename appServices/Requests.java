@@ -18,6 +18,11 @@ public class Requests {
 		
 	
 	
+	public Requests()
+	{
+		
+	}
+	
 	/**
 	 * @param player
 	 * @param playG
@@ -33,6 +38,16 @@ public class Requests {
 		
 	}
 
+	public void updateStatus(RequestStatus status)
+	{
+		this.status = RequestStatus.Accepted;
+
+	}
+	
+	public int getID()
+	{
+		return id;
+	}
 
 
 

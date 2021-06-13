@@ -1,4 +1,5 @@
 package appServices;
+import java.io.File;
 import java.util.Scanner;
 
 import usersPackage.*;
@@ -21,6 +22,7 @@ public class SystemUI {
 	 * @param database
 	 */
 	public SystemUI(Database database) {
+		booking = new Booking();
 		this.database = database;
 		defaultAdmin = database.adminList.get(0);
 		defaultAdmin.linkWithSystemUI(this);
@@ -56,6 +58,8 @@ public class SystemUI {
 				case 0:
 				{
 					System.out.println("Invalid email or password");
+					
+					valid = true;
 					break;
 				}
 				
@@ -67,7 +71,16 @@ public class SystemUI {
 					if(userType == 1)
 					{
 						defaultAdmin = (Administrator)currentUser;
+						adminMenu();
 						
+					}
+					else if(userType == 2)
+					{
+						playerMenu();
+					}
+					else
+					{
+						ownerMenu();
 					}
 				}
 			}
@@ -111,7 +124,15 @@ public class SystemUI {
 					int index;
 					booking.showAvailablePlayG();
 					
-					System.out.println("type playground index");
+					System.out.println("1- choose playground\n"+
+									   "2- Go back to menu");
+					int num = scan.nextInt();
+					if(num == 2)
+					{
+						correctChoice = false;
+						break;
+					}
+					System.out.println("1-type playground index");
 					index = scan.nextInt();
 					
 					Playground tmpPlayG = booking.getPlayG(index);
@@ -136,12 +157,14 @@ public class SystemUI {
 					
 					booking.book(tmpPlayG, player, date);
 					
+					correctChoice = false;
 					break;
 				}
 				
 				case 2:
 				{
 					player.showMyRequests();
+					correctChoice = false;
 					break;
 				}
 				
@@ -208,12 +231,33 @@ public class SystemUI {
 					owner.addPlayground(tmpPlayG);
 					defaultAdmin.addRequestedPlayground(tmpPlayG);
 					
+					correctChoice = false;
 					break;
 				}
 				
 				case 2:
 				{
-					owner.showMyRequests();
+					if(owner.showMyRequests())
+					{
+						System.out.println("1- choose request to accept\n"+
+								   "2- Go back to menu");
+						int num = scan.nextInt();
+						if(num == 2)
+						{
+							correctChoice = false;
+							break;
+						}
+						
+						System.out.println("Enter Index of request");
+						int reqNum = scan.nextInt();
+						
+						owner.acceptReq(reqNum);
+						
+						correctChoice = false;
+						break;
+						
+					}
+					correctChoice = false;
 					break;
 				}
 				
@@ -226,6 +270,7 @@ public class SystemUI {
 				default:
 				{
 					valid = true;
+					correctChoice = false;
 				}
 			}
 		
@@ -253,6 +298,10 @@ public class SystemUI {
 				if(choice >=1 && choice <= 2)
 				{
 					correctChoice = true;
+					if(choice == 2)
+					{
+						valid = false;
+					}
 				}
 				else
 				{
@@ -279,20 +328,25 @@ public class SystemUI {
 						
 						System.out.println("playground Accepted!");
 					}
+					else
+					{
+						valid = false;
+						break;
+					}
 					
 					break;
 				}
 				
 				case 2:
 				{
-					valid = true;
+					valid = false;
 					break;
 				}
 			
 				
 				default:
 				{
-					valid = true;
+					valid = false;
 				}
 			}
 		

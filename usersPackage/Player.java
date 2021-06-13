@@ -27,13 +27,22 @@ public class Player extends UserProfile{
 		requests.add(req);
 	}
 	
+	
+	
 	public void showMyRequests()
 	{
-		System.out.println("Requests");
-		
-		for(Requests i: requests)
+		if(!requests.isEmpty())
 		{
-			System.out.println(i.toString());
+			System.out.println("Requests");
+			
+			for(Requests i: requests)
+			{
+				System.out.println(i.toString());
+			}
+		}
+		else
+		{
+			System.out.println("List is empty!!");
 		}
 	}
 	

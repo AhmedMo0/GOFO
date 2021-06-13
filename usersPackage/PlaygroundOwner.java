@@ -16,6 +16,7 @@ public class PlaygroundOwner extends UserProfile{
 		this.phone = phone;
 		this.city = city;
 		requests = new ArrayList<>();
+		playgrounds = new ArrayList<>();
 	}
 	
 	public void addNewRequest(Requests req)
@@ -23,15 +24,31 @@ public class PlaygroundOwner extends UserProfile{
 		requests.add(req);
 	}
 	
-	public void showMyRequests()
+	public boolean showMyRequests()
 	{
-		System.out.println("Requests");
+		int x = 0;
 		
-		for(Requests i: requests)
+		if(!requests.isEmpty())
 		{
-			System.out.println(i.toString());
+			System.out.println("Requests");
+			
+			for(Requests i: requests)
+			{
+				System.out.println("index: " + x);
+				System.out.println(i.toString());
+				x++;
+			}
+			
+			return true;
 		}
+		else
+		{
+			System.out.println("List is empty!!");
+		}
+
+		return false;
 	}
+	
 	
 	
 	public void addPlayground(Playground playG)
@@ -39,8 +56,10 @@ public class PlaygroundOwner extends UserProfile{
 		playgrounds.add(playG);
 	}
 	
-//	public void updatePlayground(Playground playground){}
-//	public boolean acceptReq(int id) {return true;}
+	public void acceptReq(int index)
+	{
+		requests.get(index).updateStatus(RequestStatus.Accepted);
+	}
 //	public boolean deleteReq(int id) {return true;}
 	
 	

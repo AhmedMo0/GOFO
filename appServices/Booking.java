@@ -36,10 +36,17 @@ public class Booking {
 	public void showAvailablePlayG()
 	{
 		int x = 0;
-		for(Playground playG: livePlaygrounds)
+		if(!livePlaygrounds.isEmpty())
 		{
-			System.out.println("------------------------------\n" + "index: " + x +"\n" + playG.toString() + "\n------------------------------\n");
-			x++;
+			for(Playground playG: livePlaygrounds)
+			{
+				System.out.println("------------------------------\n" + "index: " + x +"\n" + playG.toString() + "\n------------------------------\n");
+				x++;
+			}
+		}
+		else
+		{
+			System.out.println("List is empty!!");
 		}
 	}
 	

@@ -43,6 +43,11 @@ public class BookingDate {
 		return isBooked;
 	}
 
+	public int getHours()
+	{
+		return endTime - startTime;
+	}
+	
 	@Override
 	public String toString() {
 		return "BookingDate [day=" + day + ", month=" + month + ", year=" + year + ", startTime=" + startTime
